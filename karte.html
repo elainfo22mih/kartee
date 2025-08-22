@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zaštićene karte</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #login, #content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  #content {
+    display: none;
+  }
+  input[type="password"] {
+    padding: 10px;
+    width: 200px;
+    margin-top: 10px;
+  }
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  img {
+    max-width: 90%;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h2>Unesite lozinku za pristup kartama</h2>
+  <input type="password" id="pass" placeholder="Lozinka">
+  <br>
+  <button onclick="checkPassword()">Pristupi</button>
+  <p id="error" style="color:red; display:none;">Pogrešna lozinka!</p>
+</div>
+
+<div id="content">
+  <h2>Vaše karte</h2>
+  <div id="images"></div>
+</div>
+
+<script>
+// Lozinka
+const correctPassword = "volimte";
+
+// Lista slika koje želiš prikazati (možeš dodati više)
+const images = [
+  "karte/karta1.jpg",
+  "karte/karta2.jpg",
+  "karte/karta3.jpg"
+];
+
+function checkPassword() {
+  const input = document.getElementById('pass').value;
+  if(input === correctPassword) {
+    document.getElementById('login').style.display = 'none';
+    const contentDiv = document.getElementById('content');
+    const imagesDiv = document.getElementById('images');
+
+    // Prikazujemo slike tek sada
+    images.forEach(src => {
+      const img = document.createElement("img");
+      img.src = src;
+      imagesDiv.appendChild(img);
+    });
+
+    contentDiv.style.display = 'block';
+  } else {
+    document.getElementById('error').style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
